@@ -1,0 +1,63 @@
+.youtube-video-form {
+
+    &>form {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        &>div:nth-child(1) {
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+
+
+        }
+    }
+
+    & .box-rich-text-wrapper {
+        max-width: 700;
+    }
+}
+
+& .main-info {
+    display: flex;
+    width: 100%;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    &>div {
+        margin-top: 40px;
+        width: 100%;
+        min-width: var(--m-w);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+
+}
+
+@media screen and (max-width:1280px) {
+    .youtube-video-form {
+        &>form {
+            &>div:nth-child(1) {
+
+                &>.main-info {
+
+                    &> :nth-child(2) {
+                        width: 100%;
+
+                    }
+
+                    &> :nth-child(1) {
+                        width: 100%;
+
+                    }
+                }
+            }
+        }
+
+    }
+}

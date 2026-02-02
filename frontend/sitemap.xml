@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://motorizando.com.ar/inicio</loc>
+    <lastmod>2025-04-15T21:28:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://motorizando.com.ar/noticias</loc>
+    <lastmod>2025-04-15T21:28:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://motorizando.com.ar/lanzamientos</loc>
+    <lastmod>2025-04-15T21:28:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://motorizando.com.ar/adelantos</loc>
+    <lastmod>2025-04-15T21:28:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  
+  <url>
+    <loc>https://motorizando.com.ar/nosotros</loc>
+    <lastmod>2025-04-15T21:28:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+   <!-- 🔒 páginas legales -->
+  <url>
+    <loc>https://www.motorizando.com.ar/privacidad</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+  <url>
+    <loc>https://www.motorizando.com.ar/terminos</loc>
+    <priority>0.3</priority>
+    <changefreq>yearly</changefreq>
+  </url>
+
+</urlset>

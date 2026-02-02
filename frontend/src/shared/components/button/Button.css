@@ -1,0 +1,123 @@
+.btn {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 2px;
+  width: 95%;
+  max-width: 450px;
+  height: 35px;
+  min-height: 35px;
+  z-index: 1;
+  background-color: transparent !important;
+
+  &>button {
+    z-index: 1;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 1;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+
+  }
+
+  &>button::before {
+    position: absolute;
+    content: "";
+    width: 120%;
+    height: 150%;
+    left: -350px;
+    right: 0;
+    box-shadow: 0 0 10px red, 0 0 10px red, 0 0 10px;
+    transform: rotate(90deg);
+    background: var(--m-g);
+    filter: blur(30px);
+
+  }
+
+  &>button:hover::before {
+    transition: all 300ms ease-in-out;
+    left: 300px;
+  }
+
+
+  &.type-1 {
+    &>button {
+      background: linear-gradient(150deg, rgb(104, 103, 103) -50%, rgb(14, 13, 13) 50%);
+      transition: var(--t-t) ease;
+    }
+
+    &>button:hover {
+      transform: scale(1.01);
+      box-shadow: 0px 2px 5px 3px rgba(0, 0, 0, 0.523);
+      color: var(--m-c);
+      border: solid 0.1px rgba(255, 115, 0, 0.425);
+    }
+  }
+
+
+
+  &.type-2 {
+
+    &>button {
+      background-color: rgb(32, 30, 28);
+
+      &>span {
+        font-weight: 900;
+        color: white;
+        background-image: var(--m-g);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+    }
+
+    &>button:hover {
+      &>span {
+        color: transparent;
+        transition: var(--t-t) all ease;
+      }
+    }
+  }
+
+
+  &>span {
+    z-index: 1;
+    width: 0%;
+    height: 0%;
+    position: absolute;
+    background-color: rgba(252, 252, 252, 0.726);
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: 200ms ease;
+    cursor: pointer;
+  }
+
+
+}
+
+@media screen and (max-width:768px) {
+
+  .btn {
+
+
+    &>button {
+      min-width: 200px;
+      font-size: 0.9rem;
+
+    }
+  }
+
+}

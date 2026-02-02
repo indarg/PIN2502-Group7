@@ -1,0 +1,12 @@
+.dropdown{
+    width: 100%;
+    max-height: 35px;
+    border-radius: 15px;
+    & > fieldset {
+        border: var(--color-5) solid 0.1px;
+    }
+
+    &.table-dropdown{
+        max-height: 35px;
+    }
+}

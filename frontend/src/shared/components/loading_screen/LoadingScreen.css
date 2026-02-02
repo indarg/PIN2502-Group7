@@ -1,0 +1,286 @@
+/* .loader {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../public/background-1.webp');
+        background-position: center;
+
+        opacity: 0.1;
+        filter: contrast(100%) brightness(80%);
+        z-index: -1;
+    }
+} */
+
+/* .neon-curve {
+    width: 10000px;
+    height: 300px;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(135deg, #ff0000, #ff5050);
+    box-shadow: 0 0 20px red, 0 0 60px red;
+    animation: pulseGlow 2s infinite alternate;
+    transform: rotate(45deg);
+}
+
+@keyframes pulseGlow {
+    from {
+        box-shadow: 0 0 10px red, 0 0 30px red;
+    }
+
+    to {
+        box-shadow: 0 0 20px red, 0 0 60px red;
+    }
+} */
+
+/* 
+body {
+    background-color: #0a0a0a;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glow-path {
+    fill: none;
+    stroke: #ff0000;
+    stroke-width: 8;
+    filter: url(#glow);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        stroke: #ff0000;
+        filter: drop-shadow(0 0 5px red) drop-shadow(0 0 10px red);
+    }
+
+    50% {
+        stroke: #ff4d4d;
+        filter: drop-shadow(0 0 15px #ff4d4d) drop-shadow(0 0 25px #ff4d4d);
+    }
+} */
+
+
+body {
+    background-color: #000;
+    /* Fondo oscuro para que el glow resalte */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.svg-container {
+    width: 1423px;
+    /* Tamaño del SVG */
+    height: 1423px;
+    position: relative;
+}
+
+svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* El rect base del SVG */
+.base-rect {
+    fill: #D9D9D9;
+    /* Color base del rect */
+}
+
+/* Animación para el desplazamiento del glow */
+@keyframes glow-move {
+    0% {
+        transform: translateX(-100%);
+        /* Comienza el "flash" del glow fuera del lado izquierdo del rect */
+    }
+
+    100% {
+        transform: translateX(100%);
+        /* Termina el "flash" del glow fuera del lado derecho del rect */
+    }
+}
+
+/* Estilos para el elemento que contendrá el glow y se animará */
+.glow-wrapper {
+    /* Opcional: Para controlar la visibilidad del glow */
+    overflow: hidden;
+    /* Esto es si el glow se desborda y no queremos que se vea fuera del SVG */
+    position: absolute;
+    /* Para que el glow-path pueda ser posicionado y animado */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    /* Para que no interfiera con otros eventos si los hubiera */
+}
+
+/* El rect que será el glow */
+.glow-path {
+    /* Este rect no tiene un fill propio, su color viene del filtro */
+    fill: none;
+    /* Importante para que el filtro maneje el color */
+    filter: url(#neon-glow);
+    /* Aplica el filtro de glow */
+    /* La animación se aplicará al elemento que contiene este rect o a este mismo */
+    transform-origin: center center;
+    /* Asegura que la transformación sea relativa al centro */
+    animation: glow-move 10s linear infinite;
+    /* Animación de desplazamiento */
+}
+
+/* CSS para animar el clipPath directamente */
+#moving-window {
+    animation: moveClipWindow 10s linear infinite;
+    /* La duración y el tipo de repetición */
+}
+
+@keyframes moveClipWindow {
+    0% {
+        transform: translateX(-100%);
+        /* Comienza el clip fuera del elemento */
+    }
+
+    100% {
+        transform: translateX(calc(1945px + 100%));
+        /* Termina el clip fuera del elemento. 1945px es el ancho del rect. */
+        /* Asegúrate que el translateX sea suficiente para salir completamente. */
+    }
+}
+
+        body {
+            background-color: #000; /* Fondo oscuro base */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial Black', sans-serif; /* Para el texto de ejemplo */
+        }
+
+        .carbon-fiber-background {
+            /* Simulación de fondo de fibra de carbono */
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCI+CjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgZmlsbD0iIzIyMiIvPgo8cGF0aCBkPSJNMCAwbDE4IDE4TTQuNSAwTDQuNSAxOCBNMTMuNSAwTDEzLjUgMTgiIHN0cm9rZT0iIzQ0NCIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxwYXRoIGQ9Ik0wIDQuNUwxOCAzLjUgTTUuNSAxOCBMOC41IDAgTTExLjUgMTggTDE0LjUgMCIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjEiLz4KPC9zdmc+');
+            background-size: 18px 18px; /* Ajusta el tamaño del patrón */
+            width: 100vw;
+            height: 100vh;
+            position: absolute; /* Para que ocupe todo el espacio y el neón quede encima */
+            top: 0;
+            left: 0;
+            opacity: 0.8; /* Para que el neón resalte más */
+        }
+
+        .container {
+            position: relative;
+            width: 800px; /* Ajusta según el tamaño de tu SVG o texto */
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Texto "Motorizando" */
+        .neon-text {
+            font-size: 8em; /* Tamaño del texto */
+            color: #fff; /* Color base del texto */
+            text-shadow: 0 0 10px #00f, /* Sombra para el efecto de neón */
+                         0 0 20px #00f,
+                         0 0 30px #00f,
+                         0 0 40px #00f;
+            filter: blur(2px); /* Un ligero blur para el efecto glow */
+            z-index: 2; /* Asegura que el texto esté encima del glow de fondo */
+            position: relative; /* Para que text-shadow funcione correctamente si está en z-index */
+        }
+
+        /* El elemento que simulará la iluminación en el fondo */
+        .background-glow {
+            position: absolute;
+            width: 500px; /* Ancho del área de luz que se desplaza */
+            height: 200px; /* Altura del área de luz que se desplaza */
+            background: radial-gradient(circle at center, rgba(138, 43, 226, 0.6) 0%, rgba(138, 43, 226, 0.0) 70%);
+            border-radius: 50%; /* Para que la luz sea circular */
+            transform: translateX(-100%) translateY(-50%); /* Posición inicial, fuera de vista */
+            animation: moveBackgroundGlow 4s linear infinite; /* Animación de desplazamiento */
+            z-index: 1; /* Detrás del texto pero delante del fondo de fibra */
+            mix-blend-mode: screen; /* O 'lighten' o 'overlay' para mejor mezcla con el fondo */
+            pointer-events: none; /* Para que no interfiera con interacciones */
+            filter: blur(30px); /* Un blur adicional para el efecto de luz difusa */
+        }
+
+        /* Puedes duplicar y ajustar si quieres que sea más largo o más complejo */
+        /* Si quieres que se ilumine el background del rect SVG, esto es más complejo */
+
+        /* Para el SVG (si usas el rect de tu pregunta) */
+        svg {
+            position: absolute;
+            z-index: 2;
+        }
+
+        .svg-neon-glow {
+            /* Aquí iría tu SVG con el filtro de neón como vimos en la respuesta anterior */
+            /* Este es el shape SVG que te pasaron: */
+            /* Lo duplicaríamos y aplicaríamos el filtro de neón */
+            fill: #D9D9D9; /* Color base del rect */
+            filter: url(#neon-glow); /* Aplicar el filtro de glow */
+            /* La animación de movimiento del glow del rect se haría aquí o en un contenedor */
+        }
+
+        /* Animación para mover la luz de fondo */
+        @keyframes moveBackgroundGlow {
+            0% {
+                transform: translateX(-100%) translateY(-50%); /* Fuera de vista a la izquierda */
+                opacity: 0;
+            }
+            10% {
+                opacity: 1; /* Aparece */
+            }
+            90% {
+                transform: translateX(100%) translateY(-50%); /* Se desplaza hacia la derecha */
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100%) translateY(-50%); /* Fuera de vista a la derecha */
+                opacity: 0;
+            }
+        }
+
+        /* Para el filtro SVG (si usas un shape SVG) */
+        .rect-wrapper {
+            position: absolute;
+            width: 1423px; /* El ancho original de tu SVG */
+            height: 1423px; /* La altura original de tu SVG */
+            /* Centrar el wrapper si es necesario */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rect-neon-element {
+            /* Este es el rect real con el filtro, pero animaremos un clip-path sobre él */
+            fill: #D9D9D9; /* Color base del rect */
+            filter: url(#neon-glow); /* Aplicar el filtro de glow */
+        }
+
+        /* Filtros SVG para el rect (replicando los de la respuesta anterior) */
+        #neon-glow {
+            /* Para que el glow se vea bien, el feFlood debe ser el color del glow */
+            /* En este caso, el color es morado/azul para el background-glow */
+        }

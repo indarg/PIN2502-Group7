@@ -1,0 +1,21 @@
+.container {
+    min-width: 400px;
+    border: 0.1px solid gray;
+    border-radius: 8px;
+    & .header{
+        border-bottom: 0.1px solid gray;
+        padding: 5px;
+    }
+
+    & .content {
+        padding: 5px;
+        overflow: auto;
+        min-height: 50px;
+        max-height: 400px;
+        
+    }
+
+    & .content > * {
+        margin: 0;
+    }
+}

@@ -1,0 +1,12 @@
+image: atlassian/default-image:2
+pipelines:
+  branches:
+    master:
+      - step:
+          name: Deploy via SSH
+          script:
+            - pipe: atlassian/ssh-run:0.2.2 # Or use direct SSH commands
+              variables:
+                SSH_USER: $VPS_USER
+                SERVER: $VPS_HOST
+                COMMAND: 'bash /var/www/motorizando/deploy.sh'

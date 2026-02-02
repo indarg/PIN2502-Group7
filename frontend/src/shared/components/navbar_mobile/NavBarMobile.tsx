@@ -1,0 +1,45 @@
+
+import MenuIcon from '@mui/icons-material/Menu';
+import { IconButton, Typography } from "@mui/material";
+import { FC, useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import GlobalSearcher from "../global_searcher/GlobalSearcher";
+import "./NavBarMobile.css";
+import { useCommon } from 'src/context/CommonContext/useCommon';
+
+export const NavBarMobile: FC = () => {
+    const {isMobileNavCollapsed,setMobileNavCollapse} = useCommon();
+    useEffect(() =>{console.log(isMobileNavCollapsed)},[isMobileNavCollapsed]);
+    return (
+        <nav className="nav-bar-mobile">
+            <div >
+                <NavLink to="/inicio">
+                    <svg width={60} xmlns="http://www.w3.org/2000/svg" id="Capa_2" data-name="Capa 2" viewBox="0 0 705.71 232.18">
+                        <defs>
+                        </defs>
+                        <g id="Capa_1-2" data-name="Capa 1">
+                            <path className="cls-1" fill="#d14d16" d="M261.84.12L366.92,0s-12.53,150.59-158.32,232.18H0S212.5,220.75,261.84.12Z" />
+                            <path className="cls-1" fill="#d14d16" d="M313.55,134.5c-16.28,26.85-29.67,59.05-38.41,97.69h111.58c6.26-22.69,27.09-83.04,92.32-104.99-.23-.84-31.95,42.69-30.87,104.99h116.97c.28.03-31.22-123.46,140.57-201.38-10.14,4.3-126.49,17.38-191.58,64.79L550.66,0s-155.1-.8-237.12,134.5" />
+                        </g>
+                    </svg>
+                </NavLink>
+                <IconButton onClick={() => setMobileNavCollapse(!isMobileNavCollapsed)}>
+                    <MenuIcon sx={{ color: "white" }} />
+                </IconButton>
+            </div>
+            <div className={isMobileNavCollapsed ? 'collapsed' : ''}>
+                <section>
+                    <NavLink to="/inicio" className={({ isActive }) => isActive ? "active-link" : ""}><Typography variant="button">Inicio</Typography></NavLink>
+                    <NavLink to="/noticias" className={({ isActive }) => isActive ? "active-link" : ""}><Typography variant="button">Noticias</Typography></NavLink>
+                    <NavLink to="/lanzamientos" className={({ isActive }) => isActive ? "active-link" : ""}><Typography variant="button">Lanzamientos</Typography></NavLink>
+                    <NavLink to="/adelantos" className={({ isActive }) => isActive ? "active-link" : ""}><Typography variant="button">Adelantos</Typography></NavLink>
+                    <NavLink to="/nosotros" className={({ isActive }) => isActive ? "active-link" : ""}><Typography variant="button">Nosotros</Typography></NavLink>
+                </section>
+                <div className="nav-search">
+                    <GlobalSearcher ></GlobalSearcher>
+                </div>
+            </div>
+        </nav>
+    )
+}
+export default NavBarMobile;
