@@ -1,16 +1,13 @@
 # Build stage
 FROM node:20-alpine as build
-
-WORKDIR /app
-
-# Copy package files first to leverage Docker caching
-COPY package*.json ./
-
-# Install dependencies
-RUN npm ci --only=production
+ENV APP_PATH=/opt/web/motorizando
+WORKDIR $APP_PATH
 
 # Copy source code
 COPY . .
+
+# Install dependencies
+RUN npm install
 
 # Build the application
 RUN npm run build
@@ -19,10 +16,10 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy built files
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build $APP_PATH/dist /usr/share/nginx/html
 
 # Copy custom nginx configuration to handle React Router
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Set correct permissions
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
