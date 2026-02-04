@@ -1,0 +1,51 @@
+"""This module contains the implementation of user repository"""
+from abc import ABC, abstractmethod
+
+from common.repository.base_repository import BaseRepository
+
+
+class UserRepository(BaseRepository, ABC):
+    """User repository"""
+
+    @abstractmethod
+    def sign_up(self, name, lastname, email, password):
+        """
+        Create new user.
+        """
+
+
+    @abstractmethod
+    def sign_up(self, name, lastname, email, password):
+        """
+        Create new user.
+        """
+
+    @abstractmethod
+    def get_user_by_email(self, email):
+        """
+        Retrieve user from the database by email address.
+        """
+
+    @abstractmethod
+    def get_user_by_filters(self, **kwargs):
+        """
+           Get users based on dynamic filters.
+           Accepts any combination of filter arguments.
+           """
+
+    @abstractmethod
+    def check_password(self, user_id: str, password: str) -> bool:
+        """Verify if the password is correct comparing it with the real password
+        
+        Keyword arguments:
+        user_id -- the id of the user
+        password -- the raw password
+        """
+
+    @abstractmethod
+    def update_user_profile(self, data):
+        """Update user profile with the provided data.
+        
+        Keyword arguments:
+        data -- dictionary containing user profile data to update
+        """
