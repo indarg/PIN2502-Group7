@@ -1,0 +1,22 @@
+.divider {
+    min-height: 20vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+.divider.pd {
+    padding: 80px;
+}
+
+@media screen and (max-width:1280px) {
+    .divider.pd {
+        padding: 35px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .divider.pd {
+        padding: 5px;
+    }
+}

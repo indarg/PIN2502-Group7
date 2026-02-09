@@ -1,0 +1,44 @@
+.banner-advertisement {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.banner-swiper {
+  width: 100%;
+  max-width: 2048px;
+  --swiper-navigation-color: #ff4d00;
+  --swiper-pagination-color: #ff4d00;
+}
+
+.banner-swiper .swiper-button-next::after,
+.banner-swiper .swiper-button-prev::after {
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; /* contorno negro */
+}
+
+/* Puntos de paginación con contorno negro */
+.banner-swiper .swiper-pagination-bullet {
+  background: #ff4d00;
+  box-shadow: 0 0 0 2px #000;
+}
+
+/* Si hay solo una imagen → centrar y ocupar 100% del viewport */
+.banner-swiper.single-image {
+  width: 100vw;
+  justify-content: center;
+}
+
+.banner-swiper.single-image img {
+  display: block;
+  margin: 0 auto;
+  width: 100vw;
+  object-fit: cover;
+  max-height: 400px;
+}

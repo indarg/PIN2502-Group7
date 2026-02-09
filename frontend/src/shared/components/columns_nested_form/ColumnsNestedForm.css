@@ -1,0 +1,30 @@
+.columns-nested-form {
+    display: flex;
+    flex-direction: column;
+
+    & .bodytext-imagecolumn {
+        margin-top: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+
+        &> :nth-child(1) {
+            flex-grow: 1;
+            height: 100%;
+            width: 50%;
+            min-width: var(--m-w);
+
+        }
+
+        &> :nth-child(2) {
+            width: 30%;
+            min-width: var(--m-w);
+            width: 400px !important;
+            &>* {
+                width: 400px;
+            }
+        }
+    }
+}

@@ -1,0 +1,97 @@
+.crm-login-page {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 252, 247);
+
+    &>section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 100%;
+        min-height: 100vh;
+        min-width: var(--m-w);
+
+        &:nth-child(1) {
+            width: 33%;
+
+            &>img:nth-child(1) {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                filter: brightness(30%);
+                object-fit: cover;
+
+            }
+
+            &>.logo {
+                position: relative;
+                transform: scale(2);
+            }
+        }
+
+        &:nth-child(2) {
+            flex-grow: 1;
+            flex-direction: column;
+
+            &>div {
+                height: 150px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &>span {
+                    border-radius: 50%;
+                    background-color: #878889;
+                    padding: 25px;
+
+                    &>img {
+                        width: 60px;
+                        height: 60px;
+                    }
+                }
+            }
+
+            &>form {
+                height: 300px;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                box-sizing: border-box;
+                gap: 20px;
+
+                &>div:nth-child(3) {
+                    margin-top: 40px;
+                    display: flex;
+                    justify-content: space-between;
+
+                    &>button {
+                        width: 100%;
+                        color: white;
+/* 
+                        &:nth-child(1) {
+                            border-color: #c4c4c4;
+                            color: rgb(70, 69, 69);
+                        } */
+/* 
+                        &:nth-child(2) {
+                            background-color: var(--m-c);
+                            color: white;
+                        } */
+                    }
+                }
+            }
+
+            &>div,
+            &>form {
+                width: 100%;
+                max-width: 800px;
+
+                min-width: var(--m-w);
+            }
+
+        }
+
+
+    }
+}

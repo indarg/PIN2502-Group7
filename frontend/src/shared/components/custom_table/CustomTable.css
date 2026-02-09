@@ -1,0 +1,42 @@
+.custom-table{
+    display: flex;
+    flex-direction: column;
+    min-height: 300px;
+    flex-grow: 1;
+    position: relative;
+    
+    & > .toolbar{
+        align-items: center;
+        display: flex;
+        gap: 50px;
+        margin: 10px 0;
+        & > .searcher {
+            width: 60%;
+        }
+        
+        & > h1 {
+            color: var(--color-5);
+            
+        }
+        
+        & > .actions{
+            
+            display: flex;
+            gap: 10px;
+            margin-left: auto;
+            justify-content: space-between;
+            
+            & > div:nth-child(1) {
+                display: flex;
+                margin-right: auto;
+            }
+        }
+    }
+
+}
+
+/* * .MuiDataGrid-filler, * .MuiDataGrid-cellEmpty{
+    width: 0px !important;
+    min-width:0px !important ;
+    border: 1px solid !important;
+} */

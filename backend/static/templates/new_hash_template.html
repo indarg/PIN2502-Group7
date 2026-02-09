@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .logo {
+            max-width: 150px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .content {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Un azul de ejemplo */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://motorizando-file-storage.s3.us-east-2.amazonaws.com/uploads/images/m-logo.png" alt="Logo de tu Empresa" class="logo">
+        </div>
+        <div class="content">
+            <p>Hola <strong>{{ user_name }}</strong>,</p>
+            <p>En este correo encontrarás el enlace para el ingreso al modulo administrativo de Motorizando. Recuerda evitar compartir este link para</p>
+            <p>Haz click en el siguiente enlace para ingresar.:</p>
+            <div class="button-container">
+                <a href="{{ activation_link }}" class="button">Ingresar al modulo administrativo</a>
+            </div>
+            <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+            <p>Motorizando</p>
+        </div>
+        <div class="footer">
+            <p>&copy; {{ current_year }} Tu Empresa. Todos los derechos reservados.</p>
+        </div>
+    </div>N
+</body>
+</html>

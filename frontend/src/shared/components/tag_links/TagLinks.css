@@ -1,0 +1,12 @@
+.tag-links{
+    display:"flex";
+    flex-direction: "row";
+    font-size: 0.8rem !important;
+    font-weight: 200 !important;
+    & > .tag-chip{
+        cursor: pointer;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+.success-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    height: 400px;
+    width: 600px;
+    gap: 50px;
+    animation: show-in 300ms;
+    animation-fill-mode: both;
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        animation: show-in 300ms;
+        animation-delay: 100ms;
+        animation-fill-mode: both;
+    }
+}

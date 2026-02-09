@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# Terraform (No subir el binario ni el estado local)
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# IDEs
+.vscode/
+.idea/
+
+# Archivos de sistema y logs
+*.log
+.DS_Store
