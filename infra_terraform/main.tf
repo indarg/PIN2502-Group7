@@ -2,7 +2,7 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "2.15.0" # Versión clave para compatibilidad con API 1.41
+      version = "2.15.0" # Única versión estable para API 1.41
     }
   }
 }
@@ -17,9 +17,9 @@ resource "docker_image" "postgres_image" {
 }
 
 resource "docker_container" "postgres_container" {
-  # En la versión 2.15.0 usamos .latest para evitar el error de 'image_id'
+  # IMPORTANTE: En la v2.15.0 se usa .latest, no .image_id
   image = docker_image.postgres_image.latest 
-  name  = "db_produccion_final_ok"
+  name  = "db_final_despliegue"
 
   ports {
     internal = 5432
@@ -30,7 +30,6 @@ resource "docker_container" "postgres_container" {
     "POSTGRES_PASSWORD=secreto123"
   ]
 
-  # Persistencia de datos vinculada a tu carpeta local
   volumes {
     host_path      = "${abspath(path.module)}/pgdata"
     container_path = "/var/lib/postgresql/data"
