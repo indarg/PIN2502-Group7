@@ -1,0 +1,9 @@
+name: Test-Deploy
+on: [push] # Se activa con CUALQUIER push a CUALQUIER rama
+
+jobs:
+  check-runner:
+    runs-on: self-hosted
+    steps:
+      - name: Saludo
+        run: echo "¡El runner funciona!"
