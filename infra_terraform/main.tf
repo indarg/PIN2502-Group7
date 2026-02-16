@@ -2,27 +2,26 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "~> 3.0.1"
+      version = "2.25.0"
     }
   }
 }
 
-# Configuramos el proveedor para usar el socket de Docker de la VM
 provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 
-# Definimos la imagen de Postgres (liviana)
+# Definición de la imagen de PostgreSQL
 resource "docker_image" "postgres_image" {
-  name         = "postgres:15-alpine"
+  name         = "postgres:latest"
   keep_locally = true
 }
 
-# Creamos el contenedor de la base de datos
-resource "docker_container" "db" {
-  name  = "postgres_db"
+# Definición del contenedor de la Base de Datos
+resource "docker_container" "postgres_container" {
   image = docker_image.postgres_image.image_id
-  
+  name  = "postgres_db"
+
   ports {
     internal = 5432
     external = 5432
@@ -31,12 +30,12 @@ resource "docker_container" "db" {
   env = [
     "POSTGRES_USER=myuser",
     "POSTGRES_PASSWORD=mypassword",
-    "POSTGRES_DB=mydb"
+    "POSTGRES_DB=mydatabase"
   ]
 
-  # Persistencia de datos en la carpeta pgdata
+  # Persistencia de datos en tu carpeta local pgdata
   volumes {
-    host_path      = "${abspath(path.cwd)}/pgdata"
+    host_path      = "${abspath(path.module)}/pgdata"
     container_path = "/var/lib/postgresql/data"
   }
 
