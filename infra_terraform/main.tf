@@ -2,12 +2,13 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "2.15.0" # Única versión estable para API 1.41
+      version = "2.15.0" # Versión garantizada para API 1.41
     }
   }
 }
 
 provider "docker" {
+  # Forzamos la conexión al socket local
   host = "unix:///var/run/docker.sock"
 }
 
@@ -17,9 +18,9 @@ resource "docker_image" "postgres_image" {
 }
 
 resource "docker_container" "postgres_container" {
-  # IMPORTANTE: En la v2.15.0 se usa .latest, no .image_id
+  # En la v2.15.0 se usa .latest obligatoriamente para evitar errores de metadata
   image = docker_image.postgres_image.latest 
-  name  = "db_final_despliegue"
+  name  = "db_final_ok"
 
   ports {
     internal = 5432
