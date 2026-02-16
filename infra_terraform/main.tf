@@ -1,49 +1,44 @@
 terraform {
   required_providers {
-    # Usamos provider interno para máxima compatibilidad
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~> 3.0.1"
+    }
   }
 }
 
-# --- 1. RED ---
-resource "terraform_data" "red_infra" {
-  provisioner "local-exec" {
-    # Crea la red si no existe
-    command = "docker network create red_terraform || true"
-  }
-
-  provisioner "local-exec" {
-    when    = destroy
-    command = "docker network rm red_terraform || true"
-  }
+# Configuramos el proveedor para que use el socket local de la VM
+provider "docker" {
+  host = "unix:///var/run/docker.sock"
 }
 
-# --- 2. BASE DE DATOS  ---
-resource "terraform_data" "base_datos" {
-  depends_on = [terraform_data.red_infra]
-
-  provisioner "local-exec" {
-    # -v $(pwd)/pgdata: -> Persistencia en carpeta local.
-    # Usamos puerto 5435 para no chocar con otros postgres que tengas.
-    command = "docker run -d --rm --name db_terraform --network red_terraform -p 5435:5432 -v $(pwd)/pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secreto123 postgres:15"
-  }
-
-  provisioner "local-exec" {
-    when    = destroy
-    command = "docker stop db_terraform || true"
-  }
+# Definimos la imagen de Postgres
+resource "docker_image" "postgres_image" {
+  name         = "postgres:15-alpine"
+  keep_locally = true
 }
 
-# --- 3. PGADMIN ---
-resource "terraform_data" "pgadmin" {
-  depends_on = [terraform_data.base_datos]
-
-  provisioner "local-exec" {
-    # Interfaz web en puerto 5050
-    command = "docker run -d --rm --name pgadmin_terraform --network red_terraform -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4"
+# Creamos el contenedor de la Base de Datos
+resource "docker_container" "db" {
+  name  = "postgres_db"
+  image = docker_image.postgres_image.image_id
+  
+  ports {
+    internal = 5432
+    external = 5432
   }
 
-  provisioner "local-exec" {
-    when    = destroy
-    command = "docker stop pgadmin_terraform || true"
+  env = [
+    "POSTGRES_USER=myuser",
+    "POSTGRES_PASSWORD=mypassword",
+    "POSTGRES_DB=mydb"
+  ]
+
+  # Persistencia de datos en tu carpeta local
+  volumes {
+    host_path      = "${abspath(path.root)}/pgdata"
+    container_path = "/var/lib/postgresql/data"
   }
+
+  restart = "always"
 }
