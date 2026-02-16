@@ -18,8 +18,8 @@ resource "docker_image" "postgres_image" {
 
 resource "docker_container" "postgres_container" {
   # Cambiamos .latest por .image_id para evitar la advertencia de la imagen a8282c
-  image = docker_image.postgres_image.image_id 
-  name  = "db_produccion_final"
+  image = docker_image.postgres_image.latest 
+  name  = "db_produccion_ok"
 
   ports {
     internal = 5432
