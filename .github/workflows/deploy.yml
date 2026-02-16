@@ -7,8 +7,17 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
+      # --- PASO NUEVO PARA SOLUCIONAR EL ERROR EACCES ---
+      - name: Limpiar permisos de pgdata
+        run: |
+          if [ -d "infra_terraform/pgdata" ]; then
+            sudo chown -R $USER:$USER infra_terraform/pgdata
+          fi
+
       - name: Checkout del código
         uses: actions/checkout@v4
+        with:
+          clean: false # Esto evita que el checkout intente borrar lo que no puede
 
       - name: 1. Desplegar Infraestructura con Terraform
         run: |
@@ -18,11 +27,9 @@ jobs:
 
       - name: 2. Desplegar Stack de Aplicación (Docker Compose)
         run: |
-          # Regresamos a la raíz donde está el docker-compose.yml
           cd ..
-          # Forzamos el build para que tome cambios en el código y levantamos
           docker compose up -d --build
- 
+          
       - name: 3. Verificar estado de los contenedores
         run: |
           echo "Estado actual de los servicios:"
