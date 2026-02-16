@@ -10,12 +10,8 @@ jobs:
       - name: Descargar Código
         uses: actions/checkout@v4
 
-      - name: Inicializar Terraform
+      - name: Ejecutar Terraform
         run: |
           cd infra_terraform
           terraform init
-
-      - name: Aplicar Infraestructura
-        run: |
-          cd infra_terraform
           terraform apply -auto-approve
