@@ -25,11 +25,16 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
+#      - name: 2. Desplegar Stack de Aplicación (Docker Compose)
+#        run: |
+#          cd ..
+#          docker compose up -d --build
       - name: 2. Desplegar Stack de Aplicación (Docker Compose)
         run: |
-          cd ..
+          # Usamos la variable de entorno para asegurar que estamos en la raíz
+          cd ${{ github.workspace }}
           docker compose up -d --build
-          
+ 
       - name: 3. Verificar estado de los contenedores
         run: |
           echo "Estado actual de los servicios:"
