@@ -1,24 +1,9 @@
-name: Despliegue Automatico Terraform
-
-on:
-  push:
-    branches: [ "feature/infra-terraform", "main" ]
+name: Test-Deploy
+on: [push] # Se activa con CUALQUIER push a CUALQUIER rama
 
 jobs:
-  deploy:
-    name: 'Terraform Apply'
-    runs-on: self-hosted # <--- Esto apunta a tu runner "PersonalUbuntuServer"
-
-    defaults:
-      run:
-        working-directory: ./infra_terraform
-
+  check-runner:
+    runs-on: self-hosted
     steps:
-    - name: Checkout del código
-      uses: actions/checkout@v4
-
-    - name: Terraform Init
-      run: terraform init
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
+      - name: Saludo
+        run: echo "¡El runner funciona!"
