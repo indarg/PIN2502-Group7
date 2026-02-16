@@ -1,36 +1,22 @@
 terraform {
-  required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "2.15.0" 
-    }
-  }
+  # No necesitamos el bloque de providers de docker para esto
 }
 
-provider "docker" {
-  host = "unix:///var/run/docker.sock"
-}
-
-# ELIMINAMOS el resource "docker_image" para saltar el error de API
-
-resource "docker_container" "postgres_container" {
-  # Usamos el nombre de la imagen directamente
-  image = "postgres:15-alpine" 
-  name  = "db_final_despliegue_estable"
-
-  ports {
-    internal = 5432
-    external = 5435
+resource "null_resource" "docker_deploy" {
+  # Este recurso se ejecutará cada vez que cambies algo o el contenedor no exista
+  provisioner "local-exec" {
+    command = <<EOT
+      # 1. Limpiamos por si existe uno viejo
+      sudo docker rm -f db_final_estable || true
+      
+      # 2. Corremos el contenedor usando el comando nativo de tu Docker 1.41
+      sudo docker run -d \
+        --name db_final_estable \
+        --restart always \
+        -p 5435:5432 \
+        -e POSTGRES_PASSWORD=secreto123 \
+        -v ${abspath(path.module)}/pgdata:/var/lib/postgresql/data \
+        postgres:15-alpine
+    EOT
   }
-
-  env = [
-    "POSTGRES_PASSWORD=secreto123"
-  ]
-
-  volumes {
-    host_path      = "${abspath(path.module)}/pgdata"
-    container_path = "/var/lib/postgresql/data"
-  }
-
-  restart = "always"
 }
