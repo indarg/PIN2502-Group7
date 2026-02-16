@@ -2,14 +2,15 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "2.15.0" # Versión garantizada para API 1.41
+      version = "2.15.0" 
     }
   }
 }
 
 provider "docker" {
-  # Forzamos la conexión al socket local
   host = "unix:///var/run/docker.sock"
+  # ESTA ES LA LÍNEA MÁGICA: Forzamos a Terraform a hablar en 1.41
+  api_version = "1.41"
 }
 
 resource "docker_image" "postgres_image" {
@@ -18,9 +19,9 @@ resource "docker_image" "postgres_image" {
 }
 
 resource "docker_container" "postgres_container" {
-  # En la v2.15.0 se usa .latest obligatoriamente para evitar errores de metadata
-  image = docker_image.postgres_image.latest 
-  name  = "db_final_ok"
+  # Usamos el nombre directamente para evitar el error de metadata
+  image = docker_image.postgres_image.name 
+  name  = "db_final_bariloche"
 
   ports {
     internal = 5432
