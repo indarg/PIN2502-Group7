@@ -1,43 +1,49 @@
 terraform {
   required_providers {
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "2.25.0"
-    }
+    # Usamos provider interno para máxima compatibilidad
   }
 }
 
-provider "docker" {
-  host = "unix:///var/run/docker.sock"
-}
-
-# Definición de la imagen de PostgreSQL
-resource "docker_image" "postgres_image" {
-  name         = "postgres:15-alpine"
-  keep_locally = true
-}
-
-# Definición del contenedor de la Base de Datos
-resource "docker_container" "postgres_container" {
-  image = docker_image.postgres_image.image_id
-  name  = "postgres_db"
-
-  ports {
-    internal = 5432
-    external = 5432
+# --- 1. RED (El puente de comunicación) ---
+resource "terraform_data" "red_infra" {
+  provisioner "local-exec" {
+    # Crea la red si no existe
+    command = "docker network create red_terraform || true"
   }
 
-  env = [
-    "POSTGRES_USER=myuser",
-    "POSTGRES_PASSWORD=mypassword",
-    "POSTGRES_DB=mydatabase"
-  ]
+  provisioner "local-exec" {
+    when    = destroy
+    command = "docker network rm red_terraform || true"
+  }
+}
 
-  # Persistencia de datos en tu carpeta local pgdata
-  volumes {
-    host_path      = "${abspath(path.module)}/pgdata"
-    container_path = "/var/lib/postgresql/data"
+# --- 2. BASE DE DATOS (El Almacén Blindado) ---
+resource "terraform_data" "base_datos" {
+  depends_on = [terraform_data.red_infra]
+
+  provisioner "local-exec" {
+    # -v $(pwd)/pgdata:... -> ESTO ES CLAVE. Persistencia en carpeta local.
+    # Usamos puerto 5435 para no chocar con otros postgres que tengas.
+    command = "docker run -d --rm --name db_terraform --network red_terraform -p 5435:5432 -v $(pwd)/pgdata:/var/lib/postgresql/data -e POSTGRES_PASSWORD=secreto123 postgres:15"
   }
 
-  restart = "always"
+  provisioner "local-exec" {
+    when    = destroy
+    command = "docker stop db_terraform || true"
+  }
+}
+
+# --- 3. PGADMIN (La Torre de Control) ---
+resource "terraform_data" "pgadmin" {
+  depends_on = [terraform_data.base_datos]
+
+  provisioner "local-exec" {
+    # Interfaz web en puerto 5050
+    command = "docker run -d --rm --name pgadmin_terraform --network red_terraform -p 5050:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4"
+  }
+
+  provisioner "local-exec" {
+    when    = destroy
+    command = "docker stop pgadmin_terraform || true"
+  }
 }
