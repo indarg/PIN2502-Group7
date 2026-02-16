@@ -10,9 +10,10 @@ jobs:
       - name: Checkout Código
         uses: actions/checkout@v4
 
-      - name: Configurar Terraform
+      - name: Instalar Terraform en el Runner
         uses: hashicorp/setup-terraform@v3
         with:
+          terraform_version: "1.7.0"
           terraform_wrapper: false
 
       - name: Terraform Init y Apply
