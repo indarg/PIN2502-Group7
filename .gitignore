@@ -1,0 +1,18 @@
+# --- Terraform ---
+**/.terraform/*
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# --- Base de Datos (¡MUY IMPORTANTE!) ---
+**/pgdata/
+*.db
+*.sqlite3
+
+# --- Python / Node ---
+**/__pycache__/
+**/node_modules/
+*.pyc
+
+# --- Sistema ---
+.DS_Store
