@@ -15,9 +15,7 @@ jobs:
         with:
           terraform_wrapper: false
 
-      - name: Ejecutar con Debug
-        env:
-          TF_LOG: DEBUG
+      - name: Ejecutar
         run: |
           cd infra_terraform
           terraform init
