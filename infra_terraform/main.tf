@@ -13,7 +13,7 @@ provider "docker" {
 
 # Definición de la imagen de PostgreSQL
 resource "docker_image" "postgres_image" {
-  name         = "postgres:latest"
+  name         = "postgres:15-alpine"
   keep_locally = true
 }
 
