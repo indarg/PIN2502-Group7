@@ -2,7 +2,7 @@ terraform {
   required_providers {
     docker = {
       source  = "kreuzwerker/docker"
-      version = "2.15.0" # Versión estable para tu API de Docker
+      version = "2.15.0" 
     }
   }
 }
@@ -17,19 +17,20 @@ resource "docker_image" "postgres_image" {
 }
 
 resource "docker_container" "postgres_container" {
-  image = docker_image.postgres_image.latest
-  name  = "db_terraform_final" # Cambiamos el nombre para evitar conflictos
+  # Cambiamos .latest por .image_id para evitar la advertencia de la imagen a8282c
+  image = docker_image.postgres_image.image_id 
+  name  = "db_produccion_final"
 
   ports {
     internal = 5432
-    external = 5435 # Usamos el 5435 como tenías en tu script
+    external = 5435
   }
 
   env = [
     "POSTGRES_PASSWORD=secreto123"
   ]
 
-  # Esta es la clave de la permanencia de datos
+  # Persistencia real de datos
   volumes {
     host_path      = "${abspath(path.module)}/pgdata"
     container_path = "/var/lib/postgresql/data"
