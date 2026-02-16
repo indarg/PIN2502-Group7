@@ -1,0 +1,24 @@
+name: Despliegue Automatico Terraform
+
+on:
+  push:
+    branches: [ "feature/infra-terraform", "main" ] # Se activa al subir a estas ramas
+
+jobs:
+  deploy:
+    name: 'Terraform Apply'
+    runs-on: self-hosted # <--- Esto le ordena usar TU máquina Ubuntu
+
+    defaults:
+      run:
+        working-directory: ./infra_terraform
+
+    steps:
+    - name: Checkout del código
+      uses: actions/checkout@v4
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
