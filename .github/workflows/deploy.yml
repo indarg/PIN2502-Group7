@@ -1,7 +1,5 @@
 name: Despliegue Final Terraform
-on:
-  push:
-    branches: [ "feature/infra-terraform" ]
+on: [push]
 
 jobs:
   terraform-deploy:
@@ -10,13 +8,12 @@ jobs:
       - name: Checkout Código
         uses: actions/checkout@v4
 
-      - name: Instalar Terraform en el Runner
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.7.0"
           terraform_wrapper: false
 
-      - name: Terraform Init y Apply
+      - name: Ejecutar
         run: |
           cd infra_terraform
           terraform init
