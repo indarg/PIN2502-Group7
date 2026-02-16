@@ -1,22 +1,29 @@
-name: Despliegue Real Terraform
+name: Despliegue Completo App e Infra
 on:
   push:
     branches: [ "feature/infra-terraform" ]
 
 jobs:
-  terraform-deploy:
+  deploy:
     runs-on: self-hosted
     steps:
-      - name: Checkout Código
+      - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_wrapper: false
-
-      - name: Ejecutar
+      - name: 1. Desplegar Infraestructura con Terraform
         run: |
           cd infra_terraform
           terraform init
           terraform apply -auto-approve
+
+      - name: 2. Desplegar Stack de Aplicación (Docker Compose)
+        run: |
+          # Regresamos a la raíz donde está el docker-compose.yml
+          cd ..
+          # Forzamos el build para que tome cambios en el código y levantamos
+          docker compose up -d --build
+ 
+      - name: 3. Verificar estado de los contenedores
+        run: |
+          echo "Estado actual de los servicios:"
+          docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
