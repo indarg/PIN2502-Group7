@@ -11,15 +11,12 @@ provider "docker" {
   host = "unix:///var/run/docker.sock"
 }
 
-resource "docker_image" "postgres_image" {
-  name         = "postgres:15-alpine"
-  keep_locally = true
-}
+# ELIMINAMOS el resource "docker_image" para saltar el error de API
 
 resource "docker_container" "postgres_container" {
-  # REFERENCIA DIRECTA: Usamos el nombre de la imagen tal cual
+  # Usamos el nombre de la imagen directamente
   image = "postgres:15-alpine" 
-  name  = "db_final_bariloche_v2"
+  name  = "db_final_despliegue_estable"
 
   ports {
     internal = 5432
