@@ -1,19 +1,6 @@
-name: Despliegue Final Terraform
-on: [push]
-
-jobs:
-  terraform-deploy:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout Código
-        uses: actions/checkout@v4
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_wrapper: false
-
-      - name: Ejecutar
+- name: Ejecutar con Debug
+        env:
+          TF_LOG: DEBUG
         run: |
           cd infra_terraform
           terraform init
