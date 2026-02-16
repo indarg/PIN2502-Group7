@@ -1,0 +1,39 @@
+/* SplashScreen.css */
+.splash-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.splash-loading-overlay.fade-out {
+  opacity: 0;
+}
+
+.splash-loading-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Mobile-specific styles */
+.splash-loading-overlay.splash-mobile {
+  /* Mobile-specific adjustments */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+}
+
+.splash-loading-overlay.splash-mobile .splash-loading-video {
+  /* Ensure video covers full screen on mobile */
+  object-fit: cover;
+  -webkit-transform: translateZ(0); /* Hardware acceleration for iOS */
+  transform: translateZ(0);
+}

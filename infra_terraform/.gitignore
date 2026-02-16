@@ -1,0 +1,11 @@
+# Ignorar archivos de estado de Terraform (contienen info sensible)
+*.tfstate
+*.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+
+# Ignorar la base de datos real 
+pgdata/
+
+# Ignorar archivos de sistema
+.DS_Store

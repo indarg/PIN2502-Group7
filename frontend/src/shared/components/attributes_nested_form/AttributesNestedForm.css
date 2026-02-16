@@ -1,0 +1,26 @@
+.attributes-nested-form {
+    display: flex;
+    flex-direction: column;
+    
+    & .descriptiontext-imagecolumn {
+        margin-top: 20px;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+        & > :nth-child(1) {
+            flex-grow: 1; 
+            height: 100%;
+            max-width: 700px;
+            min-width: var(--m-w);
+
+        }
+
+        & > :nth-child(2) {
+            width: 40%;
+            flex-grow: 1;
+            min-width: var(--m-w);
+        }
+    }
+}

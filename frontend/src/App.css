@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+@font-face {
+    font-family: 'Exo';
+    src: url('../public/font/Exo-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+:root {
+    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     */
+    font-family: "Roboto", sans-serif;
+    background-color: black;
+    color: white;
+    --t-t: 300ms;
+    /* Transition time*/
+    --m-w: 300px;
+    /*min-width*/
+    --m-c: #F36F58;
+    --m-c2: #FC233C;
+    --m-c3: #FE562D;
+    --m-c4: #E6B3B6;
+    --m-a: #EB6095;
+    --m-a2: #9160EB;
+    --m-g: linear-gradient(90deg, #F36F58 0%, #FC233C 25%, #FE562D 50%, #E6B3B6 100%);
+    --banner-gradient: linear-gradient(-90deg, #FF6600 0%, #000000C4 100%);
+    --banner-gradient2: linear-gradient(90deg, #FF6600 0%, #000000C4 100%);
+    --adm-color: #191919;
+    --grey-color: #E0E0E0;
+    --desktop-padding: 40px;
+    --tablet-padding: 20px;
+    --mobile-padding: 5px;
+}
+
+.roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+}
+
+.roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.roboto-light-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+}
+
+.roboto-regular-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.roboto-bold-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+}
+
+
+
+main {
+    min-height: 100vh;
+    height: 100%;
+    width: 100%;
+
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    &:before {
+        content: "";
+        /* Es necesario que la propiedad content esté presente */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../public/background-1.svg');
+        /* Reemplaza con la ruta de tu imagen */
+        /* Ajusta la imagen para cubrir el contenedor */
+        background-position: center;
+        background-repeat: repeat-y;
+        background-position-x: 1000px;
+        /* Centra la imagen */
+        opacity: 0.2;
+        filter: brightness(40%);
+        -webkit-filter: brightness(40%);
+        /* Ajusta este valor (0.0 a 1.0) para la opacidad */
+        z-index: -1;
+        /* Mueve el pseudoelemento detrás del contenido */
+    }
+}
+
+.headline {
+    font-family: Exo;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.459);
+}
+
+
+
+section.infinite-carrousel-section {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    min-width: 99vw;
+
+    &>h1 {
+        width: 100%;
+        padding: 0 40px;
+        box-sizing: border-box;
+        text-align: left;
+    }
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+
+@keyframes show-in {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
+@keyframes fade-out {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+        z-index: -5;
+    }
+
+}
+
+@keyframes show-in-from-below {
+    0% {
+        opacity: 0;
+        transform: translateY(150px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes screen-opens {
+    0% {
+        filter: brightness(0%);
+    }
+
+    100% {
+        filter: brightness(100%);
+    }
+
+}
+
+@keyframes heartbeat-and-twist {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1) rotate(360deg);
+    }
+
+    75% {
+
+        transform: scale(0.9) rotate(360deg);
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+    }
+
+}
+
+@keyframes zoom-in-out-mgitment {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.1) translateX(10px) translateY(10px);
+    }
+
+    50% {
+        transform: scale(1.1) translateX(10px) translateY(10px);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+@keyframes width-0-to-100 {
+    0% {
+        width: 0%;
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        width: 100%;
+    }
+}
+
+.related-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 100px;
+    padding: 40px;
+    box-sizing: border-box;
+
+    &>.related-items-wrapper {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+}
+
+
+@media screen and (max-width:1460px) {}
+
+@media screen and (max-width:768px) {
+
+    .related-items-container {
+        margin: 30px 0px;
+        padding: 5px;
+
+        &>.related-items-wrapper {
+            &>div {
+                width: 100% !important;
+                max-width: max-content !important;
+                flex-grow: 1 !important;
+            }
+        }
+    }
+}
+
+.gradient-banner-text {
+    background: var(--banner-gradient);
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 10px 80px;
+    box-sizing: border-box;
+    & * {
+        font-weight: 300 !important;
+    }
+}
+
+.pd {
+    padding: 20px 80px;
+    box-sizing: border-box;
+}
+
+
+
+@media screen and (max-width:1280px) {
+    .pd {
+        padding: 20px 35px;
+    }
+
+    .gradient-banner-text {
+        padding: 10px 35px;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .pd {
+        padding: 10px;
+    }
+
+    .gradient-banner-text {
+        padding: 10px 5px;
+    }
+}
+
+.banner-detail-audit {
+    position: absolute;
+    right: 5%;
+    bottom: 30px;
+    width: 300px;
+    height: 50px;
+}
+

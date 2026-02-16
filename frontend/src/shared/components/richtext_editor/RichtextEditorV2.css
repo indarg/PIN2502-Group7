@@ -1,0 +1,9 @@
+.rich-text-editor-v2{
+  overflow-y: scroll;
+}
+@media (max-width: 1388px) {
+  .rich-text-editor-v2 {
+    display: flex;
+  }
+
+}
