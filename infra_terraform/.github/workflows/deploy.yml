@@ -2,12 +2,12 @@ name: Despliegue Automatico Terraform
 
 on:
   push:
-    branches: [ "feature/infra-terraform", "main" ] # Se activa al subir a estas ramas
+    branches: [ "feature/infra-terraform", "main" ]
 
 jobs:
   deploy:
     name: 'Terraform Apply'
-    runs-on: self-hosted # <--- Esto le ordena usar TU máquina Ubuntu
+    runs-on: self-hosted # <--- Esto apunta a tu runner "PersonalUbuntuServer"
 
     defaults:
       run:
