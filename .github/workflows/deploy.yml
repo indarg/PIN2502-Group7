@@ -1,9 +1,21 @@
-name: Test-Deploy
-on: [push] # Se activa con CUALQUIER push a CUALQUIER rama
+name: Despliegue Real Terraform
+on:
+  push:
+    branches: [ "feature/infra-terraform" ]
 
 jobs:
-  check-runner:
+  terraform-deploy:
     runs-on: self-hosted
     steps:
-      - name: Saludo
-        run: echo "¡El runner funciona!"
+      - name: Descargar Código
+        uses: actions/checkout@v4
+
+      - name: Inicializar Terraform
+        run: |
+          cd infra_terraform
+          terraform init
+
+      - name: Aplicar Infraestructura
+        run: |
+          cd infra_terraform
+          terraform apply -auto-approve
