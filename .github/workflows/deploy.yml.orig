@@ -1,0 +1,22 @@
+name: Despliegue Real Terraform
+on:
+  push:
+    branches: [ "feature/infra-terraform" ]
+
+jobs:
+  terraform-deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Código
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
+
+      - name: Ejecutar
+        run: |
+          cd infra_terraform
+          terraform init
+          terraform apply -auto-approve
