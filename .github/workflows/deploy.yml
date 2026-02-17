@@ -25,16 +25,14 @@ jobs:
           terraform init
           terraform apply -auto-approve
 
-#      - name: 2. Desplegar Stack de Aplicación (Docker Compose)
-#        run: |
-#          cd ..
-#          docker compose up -d --build
       - name: 2. Desplegar Stack de Aplicación (Docker Compose)
         run: |
-          # Usamos la variable de entorno para asegurar que estamos en la raíz
           cd ${{ github.workspace }}
-          docker compose up -d --build
- 
+          # LIMPIEZA PREVENTIVA: Removemos cualquier contenedor que use nuestros nombres
+          docker rm -f node-exporter postgres grafana prometheus cadvisor backend frontend nginx || true
+          
+          # Levantamos con --force-recreate para asegurar limpieza total
+          docker compose up -d --build --force-recreate 
       - name: 3. Verificar estado de los contenedores
         run: |
           echo "Estado actual de los servicios:"
