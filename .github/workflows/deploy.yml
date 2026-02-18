@@ -32,7 +32,7 @@ jobs:
           docker rm -f node-exporter postgres grafana prometheus cadvisor backend frontend nginx || true
           
           # Levantamos con --force-recreate para asegurar limpieza total
-          docker compose up -d --build --force-recreate 
+          docker-compose up -d --build --force-recreate 
       - name: 3. Verificar estado de los contenedores
         run: |
           echo "Estado actual de los servicios:"
